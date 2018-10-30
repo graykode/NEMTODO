@@ -14,6 +14,12 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 
 
 
+## Demo
+
+http://49.247.192.17/
+
+
+
 ## To-Do Features
 
 - 새로운 TODO(제목 + 내용)를 작성한다
@@ -25,12 +31,21 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 - TODO 내용을 수정할 수 있다.
 - TODO 항목을 삭제할 수 있다.
 
+## Quick Start
+
+```shell
+$ git clone https://github.com/graykode/NEMTODO.git
+$ npm init
+$ npm install
+```
+
 
 
 ## Server Configuration
 
-- OS : Ubuntu LTS 16.04 (`root` 권한에서 실행했습니다.)
-- nodejs : 11.0.0 (8버전보다 높은 버전을 사용하기 바랍니다.)
+- OS : Ubuntu LTS 16.04 (루트 권한에서 실행)
+- nodejs : 11.0.0 (8버전보다 높은 버전이 필요합니다.)
+
 - npm : 6.4.1
 - mongoDB shell : 2.6.12
 
@@ -62,24 +77,22 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
    $ mkdir NEMTODO && cd NEMTODO
    $ npm init --yes
    $ npm install express body-parser dotenv mongoose morgan ejs --save
+   $ npm install moment --save
    ```
 
 
 
-## Quick Start
+## Unit test & Ingegration test
 
 ```shell
-$ git clone https://github.com/graykode/NEMTODO.git
-$ npm init
-$ npm install
+$ npm install --save-dev supertest expect.js mocha chai
+$ npm test
 ```
+
+![](C:\Users\nlkey\WebstormProjects\NEMTODO\screenshot.png)
 
 
 
 ## Contact
 
-
-
-
-
-## License
+- nlkey2022@gmail.com(Tae Hwan Jung)
