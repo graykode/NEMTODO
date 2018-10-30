@@ -1,17 +1,17 @@
-const path = require('path');
 const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const ejs = require('ejs-locals');
+const router = express.Router();
+const Task = require('../model/task');
+const moment = require('moment');
 
-const app = express();
-
-app.get('/', function(req, res) {
-    res.send('hello world');
+router.get('/', async (req, res) => {
+    const tasks = await Task.find();
+    res.send(tasks);
 });
 
-app.listen(app.get('port'), () => {
-    console.log(`server on port ${app.get('port')}`);
+router.post('/add', async (req, res, next) => {
+    const task = new Task(req.body);
+    await task.save();
+    res.send(tasks);
 });
 
-module.exports = app;
+module.exports = router;
