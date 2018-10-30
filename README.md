@@ -69,18 +69,17 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 
 ## Quick Start
 
-- To start this project npm initialization needs
+```shell
+$ git clone https://github.com/graykode/NEMTODO.git
+$ npm init
+$ npm install
+```
 
-  ```shell
-  $ npm init
-  $ npm install
-  ```
 
-- Now, you can run node server using `app.js`
 
-  ```shell
-  $ node app.js
-  ```
+## Contact
+
+
 
 
 

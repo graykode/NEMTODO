@@ -53,5 +53,4 @@ router.get('/delete/:id', async (req, res, next) => {
     res.redirect('/');
 });
 
-
 module.exports = router;

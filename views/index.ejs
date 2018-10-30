@@ -40,11 +40,17 @@
     <%
         var todo = [];
         var finish = [];
+
+        // 마감일이 null이 아닌 리스트
+        var list = [];
+
         for(var i=0; i < tasks.length; i++) {
             if (tasks[i].done == false)
                 todo.push(tasks[i]);
             else
                 finish.push(tasks[i]);
+            if(tasks[i].deadline != null)
+                list.push(tasks[i]);
         }
 
         todo.sort(function (a, b) {
@@ -63,6 +69,16 @@
             }
             if (a.priority < b.priority) {
                 return -1;
+            }
+            return 0;
+        });
+
+        list.sort(function (a, b) {
+            if (a.deadline > b.deadline) {
+                return -1;
+            }
+            if (a.deadline < b.deadline) {
+                return 1;
             }
             return 0;
         });
@@ -155,4 +171,27 @@
         </div>
     </div>
 
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">알림(마감 기간이 지난 리스트)</div>
+            <div class="panel-body" id="endlist">
+                <script>
+                    setInterval(function() {
+                        var html = "";
+                        <% for(var i=0; i < list.length; i++) { %>
+                            var date = new Date('<%= list[i].deadline %>');
+                            var now = new Date();
+                            if(now > date){
+                                html += '<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title"><%= list[i].title %></h3></div><div class="panel-body"><div class="form-group"><label for="password">내용</label><%= list[i].description %></div><div class="form-group"><label for="password">마감일</label><%= moment(list[i].deadline).format("YYYY-MM-DD hh:mm:ss") %></div></div></div>';
+                            }
+                        <% } %>
+                        $('#endlist').html(html);
+                    }, 1000);
+                </script>
+            </div>
+
+        </div>
+    </div>
+
 </div>
+
