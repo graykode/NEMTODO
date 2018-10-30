@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('../model/task');
+const moment = require('moment');
 
 router.get('/', async (req, res) => {
     const tasks = await Task.find();
     res.render('index', {
-        tasks
+        tasks,
+        moment
     });
 });
 
@@ -15,10 +17,9 @@ router.post('/add', async (req, res, next) => {
     res.redirect('/');
 });
 
-router.get('/turn/:id', async (req, res, next) => {
-    let { id } = req.params;
-    const task = await Task.findById(id);
-    task.status = !task.status;
+router.get('/done/:id', async (req, res, next) => {
+    const task = await Task.findById(req.params.id);
+    task.done = !task.done;
     await task.save();
     res.redirect('/');
 });

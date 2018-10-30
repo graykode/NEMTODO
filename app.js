@@ -23,7 +23,7 @@ app.engine('ejs', ejs);
 // middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}))
-app.use(express.static( "./bower_components"));
+app.use(express.static( "./public"));
 // routes
 app.use('/', indexRoutes);
 

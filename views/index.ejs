@@ -1,76 +1,75 @@
 <% layout('layout') %>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
 
-            <div class="card">
-                <div class="card-header">추가</div>
+    <div row=""
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">추가</div>
+            <div class="panel-body">
 
-                <div class="card-body">
+                <form action="/add" method="post">
+                    <div class="form-group">
+                        <label for="password">제목</label>
+                        <input class="form-control" type="text" name="title" placeholder="제목" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">내용</label>
+                        <textarea class="form-control" name="description" cols="80" placeholder="내용을 추가하세요." required></textarea>
+                    </div>
 
-                    <form action="/add" method="post">
-                        <div class="form-group">
-                            <label for="password">제목</label>
-                            <input class="form-control" type="text" name="title" placeholder="제목" required>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" name="deadline"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
-                        <div class="form-group">
-                            <label for="password">내용</label>
-                            <textarea class="form-control" name="description" cols="80" placeholder="내용을 추가하세요." required></textarea>
-                        </div>
+                    </div>
 
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
+                    <button class="btn btn-primary" type="submit">
+                        추가
+                    </button>
+                </form>
 
-                        <button class="btn btn-primary" type="submit">
-                            추가
-                        </button>
-                    </form>
-
-                </div>
             </div>
-
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">리스트</div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">리스트</div>
+            <div class="panel-body">
 
-                <div class="card-body">
+                <% for(var i=0; i < tasks.length; i++) { %>
 
-                    <% for(var i=0; i < tasks.length; i++) { %>
-                        <div class="card">
-                            <div class="card-header"><%= tasks[i].title %></div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <%= tasks[i].description %>
-                                </div>
-                                <div class="form-group">
-                                    <a class="<%= tasks[i].status ? 'btn btn-success' : 'btn btn-dark'%>" href="/turn/<%= tasks[i]._id %>">완료</a>
-                                    <a href="/delete/<%= tasks[i]._id %>" class="btn btn-danger">삭제</a>
-                                    <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">수정</a>
-                                </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><%= tasks[i].title %></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <%= tasks[i].description %>
+                            </div>
+                            <div class="form-group">
+                                <% if (tasks[i].deadline == null){ %>
+                                    <p>마감 시간이 없는 할일입니다.</p>
+                                <% } else{ %>
+                                    <%= moment(tasks[i].deadline).format('YYYY-MM-DD hh:mm:ss') %>
+                                <% } %>
+                            </div>
+                            <div class="form-group">
+                                <a role="button" class="<%= tasks[i].done ? 'btn btn-success' : 'btn btn-primary'%>" href="/done/<%= tasks[i]._id %>">완료</a>
+                                <a href="/delete/<%= tasks[i]._id %>" class="btn btn-warning">삭제</a>
+                                <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">수정</a>
                             </div>
                         </div>
-                    <% } %>
+                    </div>
 
-                </div>
+                <% } %>
+
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">알림</div>
-            </div>
-        </div>
-
     </div>
+
 </div>

@@ -29,8 +29,8 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 
 ## Server Configuration
 
-- OS : Ubuntu LTS 16.04
-- nodejs : 11.0.0
+- OS : Ubuntu LTS 16.04 (I was configured in `root` privilege)
+- nodejs : 11.0.0 (needed higher more than 8.x)
 
 - npm : 6.4.1
 - mongoDB shell : 2.6.12
@@ -43,8 +43,6 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
    $ curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
    $ apt-get install nodejs
    ```
-
-
 
 **2. MongoDB Install & Configuration**
 
@@ -59,8 +57,6 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 - [E: Unable to locate package mongodb-org](https://stackoverflow.com/questions/28945921/e-unable-to-locate-package-mongodb-org)
 - [error: Unit mongodb.service is masked when starting mongodb](https://askubuntu.com/questions/919108/error-unit-mongodb-service-is-masked-when-starting-mongodb)
 
-
-
 **3. Express, npm Install & Configuration**
 
    ```shell
@@ -71,19 +67,21 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 
 
 
-**4. bower Install & Configuration**
-
-```shell
-   $ npm install -g bower
-   $ bower install bootstrap --save --allow-root
-   $ bower install jquery --save --allow-root
-   $ bower install eonasdan-bootstrap-datetimepicker#latest --save --allow-root
-```
-
-
-
- 
-
 ## Quick Start
+
+- To start this project npm initialization needs
+
+  ```shell
+  $ npm init
+  $ npm install
+  ```
+
+- Now, you can run node server using `app.js`
+
+  ```shell
+  $ node app.js
+  ```
+
+
 
 ## License
