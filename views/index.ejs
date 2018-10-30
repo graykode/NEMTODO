@@ -2,7 +2,6 @@
 
 <div class="container">
 
-    <div row=""
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">추가</div>
@@ -17,6 +16,8 @@
                         <label for="password">내용</label>
                         <textarea class="form-control" name="description" cols="80" placeholder="내용을 추가하세요." required></textarea>
                     </div>
+
+                    <input type='hidden' class="form-control" name="priority" value="<%= tasks.length + 1 %>"/>
 
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker1'>
@@ -36,34 +37,79 @@
         </div>
     </div>
 
+    <%
+        var todo = [];
+        var finish = [];
+        for(var i=0; i < tasks.length; i++) {
+            if (tasks[i].done == false)
+                todo.push(tasks[i]);
+            else
+                finish.push(tasks[i]);
+        }
+
+        todo.sort(function (a, b) {
+            if (a.priority > b.priority) {
+                return 1;
+            }
+            if (a.priority < b.priority) {
+                return -1;
+            }
+            return 0;
+        });
+
+        finish.sort(function (a, b) {
+            if (a.priority > b.priority) {
+                return 1;
+            }
+            if (a.priority < b.priority) {
+                return -1;
+            }
+            return 0;
+        });
+    %>
+
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">해야 하는 리스트</div>
             <div class="panel-body">
 
-                <% for(var i=0; i < tasks.length; i++) { %>
-
-                    <% if (tasks[i].done == true) continue %>
+                <% for(var i=0; i < todo.length; i++) { %>
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><%= tasks[i].title %></h3>
+                            <h3 class="panel-title"><%= todo[i].title %></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <%= tasks[i].description %>
+                                <label for="password">내용</label>
+                                <%= todo[i].description %>
                             </div>
                             <div class="form-group">
-                                <% if (tasks[i].deadline == null){ %>
-                                    <p>마감 시간이 없는 할일입니다.</p>
+                                <label for="password">마감일</label>
+                                <% if (todo[i].deadline == null){ %>
+                                    <p>마감 시간이 없는 할 일입니다.</p>
                                 <% } else{ %>
-                                    <%= moment(tasks[i].deadline).format('YYYY-MM-DD hh:mm:ss') %>
+                                    <%= moment(todo[i].deadline).format('YYYY-MM-DD hh:mm:ss') %>
                                 <% } %>
                             </div>
                             <div class="form-group">
-                                <a role="button" class="<%= tasks[i].done ? 'btn btn-success' : 'btn btn-primary'%>" href="/done/<%= tasks[i]._id %>">완료</a>
-                                <a href="/delete/<%= tasks[i]._id %>" class="btn btn-warning">삭제</a>
-                                <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">수정</a>
+                                <label for="password">우선순위 변경</label>
+                                <% if(todo.length != 1){ %>
+                                    <% if(i == 0){ %>
+                                        <a href="/swap/<%= todo[i]._id %>/<%= todo[i+1]._id %>" class="btn btn-dark">아래로</a>
+                                    <% }else if(i == todo.length-1){ %>
+                                        <a href="/swap/<%= todo[i-1]._id %>/<%= todo[i]._id %>" class="btn btn-dark">위로</a>
+                                    <% }else {%>
+                                        <a href="/swap/<%= todo[i-1]._id %>/<%= todo[i]._id %>" class="btn btn-dark">위로</a>
+                                        <a href="/swap/<%= todo[i]._id %>/<%= todo[i+1]._id %>" class="btn btn-dark">아래로</a>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                            <div class="form-group">
+                                <a role="button" class="btn btn-success" href="/done/<%= todo[i]._id %>">완료</a>
+                                <a href="/delete/<%= todo[i]._id %>" class="btn btn-warning">삭제</a>
+                                <a href="/edit/<%= todo[i]._id %>" class="btn btn-info">수정</a>
+
                             </div>
                         </div>
                     </div>
@@ -78,28 +124,28 @@
         <div class="panel panel-default">
             <div class="panel-heading">완료된 리스트</div>
             <div class="panel-body">
-                <% for(var i=0; i < tasks.length; i++) { %>
-
-                    <% if (tasks[i].done == false) continue %>
+                <% for(var i=0; i < finish.length; i++) { %>
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><%= tasks[i].title %></h3>
+                            <h3 class="panel-title"><%= finish[i].title %></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <%= tasks[i].description %>
+                                <label for="password">내용</label>
+                                <%= finish[i].description %>
                             </div>
                             <div class="form-group">
-                                <% if (tasks[i].deadline == null){ %>
-                                    <p>마감 시간이 없는 할일입니다.</p>
+                                <label for="password">마감일</label>
+                                <% if (finish[i].deadline == null){ %>
+                                    <p>마감 시간이 없는 할 일입니다.</p>
                                 <% } else{ %>
-                                    <%= moment(tasks[i].deadline).format('YYYY-MM-DD hh:mm:ss') %>
+                                    <%= moment(finish[i].deadline).format('YYYY-MM-DD hh:mm:ss') %>
                                 <% } %>
                             </div>
                             <div class="form-group">
-                                <a href="/delete/<%= tasks[i]._id %>" class="btn btn-warning">삭제</a>
-                                <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">수정</a>
+                                <a href="/delete/<%= finish[i]._id %>" class="btn btn-warning">삭제</a>
+                                <a href="/edit/<%= finish[i]._id %>" class="btn btn-info">수정</a>
                             </div>
                         </div>
                     </div>

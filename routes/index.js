@@ -24,11 +24,21 @@ router.get('/done/:id', async (req, res, next) => {
     res.redirect('/');
 });
 
-
 router.get('/edit/:id', async (req, res, next) => {
     const task = await Task.findById(req.params.id);
     console.log(task)
     res.render('edit', { task });
+});
+
+router.get('/swap/:from/:to', async (req, res, next) => {
+    const from = await Task.findById(req.params.from);
+    const to = await Task.findById(req.params.to);
+    var temp = from.priority;
+    from.priority = to.priority;
+    to.priority = temp;
+    await from.save();
+    await to.save();
+    res.redirect('/');
 });
 
 router.post('/edit/:id', async (req, res, next) => {
