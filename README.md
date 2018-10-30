@@ -29,9 +29,8 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 
 ## Server Configuration
 
-- OS : Ubuntu LTS 16.04 (I was configured in `root` privilege)
-- nodejs : 11.0.0 (needed higher more than 8.x)
-
+- OS : Ubuntu LTS 16.04 (`root` 권한에서 실행했습니다.)
+- nodejs : 11.0.0 (8버전보다 높은 버전을 사용하기 바랍니다.)
 - npm : 6.4.1
 - mongoDB shell : 2.6.12
 
