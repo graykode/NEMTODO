@@ -89,7 +89,7 @@ $ npm install --save-dev supertest expect.js mocha chai
 $ npm test
 ```
 
-![](C:\Users\nlkey\WebstormProjects\NEMTODO\screenshot.png)
+![](screenshot.png)
 
 
 
