@@ -1,0 +1,76 @@
+<% layout('layout') %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-header">추가</div>
+
+                <div class="card-body">
+
+                    <form action="/add" method="post">
+                        <div class="form-group">
+                            <label for="password">제목</label>
+                            <input class="form-control" type="text" name="title" placeholder="제목" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">내용</label>
+                            <textarea class="form-control" name="description" cols="80" placeholder="내용을 추가하세요." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">
+                            추가
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">리스트</div>
+
+                <div class="card-body">
+
+                    <% for(var i=0; i < tasks.length; i++) { %>
+                        <div class="card">
+                            <div class="card-header"><%= tasks[i].title %></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <%= tasks[i].description %>
+                                </div>
+                                <div class="form-group">
+                                    <a class="<%= tasks[i].status ? 'btn btn-success' : 'btn btn-dark'%>" href="/turn/<%= tasks[i]._id %>">완료</a>
+                                    <a href="/delete/<%= tasks[i]._id %>" class="btn btn-danger">삭제</a>
+                                    <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">수정</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">알림</div>
+            </div>
+        </div>
+
+    </div>
+</div>
