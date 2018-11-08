@@ -16,7 +16,7 @@ NEMTODO는 N(Nodejs)와 E(Express) M(Mongodb)를 사용하는 TODO LIST 입니�
 
 ## Demo
 
-http://49.247.192.17/
+http://49.247.207.5/
 
 
 
@@ -37,6 +37,8 @@ http://49.247.192.17/
 $ git clone https://github.com/graykode/NEMTODO.git
 $ npm init
 $ npm install
+$ npm install moment
+$ node app.js
 ```
 
 
